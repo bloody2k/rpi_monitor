@@ -4,6 +4,8 @@ FROM resin/armv7hf-debian:stretch
 ENV MONITOR_VERSION=0.1.675 \
     CREATED="BLOODY2k"
 
+RUN apt-get update && apt-get -y install apt-transport-https
+
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
 RUN apt-key add /mosquitto-repo.gpg.key
