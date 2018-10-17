@@ -27,4 +27,5 @@ RUN apt-get update && \
 # Install Monitor
 WORKDIR /
 RUN git clone git://github.com/andrewjfreyer/monitor
-ENTRYPOINT ["bash /monitor/monitor.sh"]
+RUN ["chmod", "+x", "/monitor/monitor.sh"]
+ENTRYPOINT ["/monitor/monitor.sh"]
