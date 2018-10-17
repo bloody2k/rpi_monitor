@@ -19,6 +19,8 @@ RUN apt-get update && \
         libmosquitto-dev \
         mosquitto \
         mosquitto-clients \
+        bc \
+        hcidump \
         git \
         wget && \
     apt-get clean && \
