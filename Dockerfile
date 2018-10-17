@@ -20,7 +20,7 @@ RUN apt-get update && \
         mosquitto \
         mosquitto-clients \
         bc \
-        hcidump \
+        bluez-hcidump \
         git \
         wget && \
     apt-get clean && \
