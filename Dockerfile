@@ -19,6 +19,7 @@ RUN apt-get update && \
         libmosquitto-dev \
         mosquitto \
         mosquitto-clients \
+        dbus \
         bc \
         bluez-hcidump \
         git \
