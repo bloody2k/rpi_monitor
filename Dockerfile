@@ -29,5 +29,5 @@ ADD startup.sh /startup.sh
 # Install Monitor
 #WORKDIR /
 #RUN git clone git://github.com/andrewjfreyer/monitor
-#RUN ["chmod", "+x", "/monitor/monitor.sh"]
+RUN ["chmod", "+x", "/startup.sh"]
 ENTRYPOINT ["/startup.sh"]
