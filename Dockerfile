@@ -24,8 +24,10 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+ADD startup.sh /startup.sh
+
 # Install Monitor
-WORKDIR /
-RUN git clone git://github.com/andrewjfreyer/monitor
-RUN ["chmod", "+x", "/monitor/monitor.sh"]
-ENTRYPOINT ["/monitor/monitor.sh"]
+#WORKDIR /
+#RUN git clone git://github.com/andrewjfreyer/monitor
+#RUN ["chmod", "+x", "/monitor/monitor.sh"]
+ENTRYPOINT ["/startup.sh"]
