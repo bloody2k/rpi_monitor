@@ -2,7 +2,6 @@
 
 FIRST_RUN_CHECK="NOT_FIRST_RUN"
 if [ ! -e $FIRST_RUN_CHECK ]; then
-    touch $FIRST_RUN_CHECK
     echo "-- First start - Installing Monitor --"
     # YOUR_JUST_ONCE_LOGIC_HERE
     cd /
@@ -10,6 +9,7 @@ if [ ! -e $FIRST_RUN_CHECK ]; then
     chmod +x /monitor/monitor.sh
     echo "-- Starting Monitor --"
     ( echo n ) | bash /monitor/monitor.sh
+    touch $FIRST_RUN_CHECK
 else
     echo "-- Starting Monitor --"
     ( echo n ) | bash /monitor/monitor.sh
