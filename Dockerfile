@@ -27,4 +27,4 @@ RUN apt-get update && \
 # Install Monitor
 WORKDIR /
 RUN git clone git://github.com/andrewjfreyer/monitor
-RUN bash /monitor/monitor.sh
+ENTRYPOINT ["/monitor/monitor.sh"]
