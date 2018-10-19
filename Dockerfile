@@ -15,7 +15,11 @@ RUN apt-cache search mosquitto
 # Install Monitor dependencies
 RUN apt-get update && \
     apt-get install -y \
-        pi-bluetooth \
+       pi-bluetooth \
+        build-essential \
+        bluez \
+        bluez-tools \
+        libbluetooth-dev \
         libmosquitto-dev \
         mosquitto \
         mosquitto-clients \
