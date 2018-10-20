@@ -1,29 +1,28 @@
-FROM resin/rpi-raspbian:stretch
+FROM resin/armv7hf-debian:stretch
 
 # Build environment variables
-ENV MONITOR_VERSION=0.1.675 \
-    CREATED="BLOODY2k"
+ENV MON_VER=0.1.675 \
+    CREATED="BLOODY2k" \
+    MON_OPT=""
 
 RUN apt-get update && apt-get -y install apt-transport-https
 
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
 RUN apt-key add /mosquitto-repo.gpg.key
-ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-stretch.list
+ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-st$
 RUN apt-cache search mosquitto
- 
+
 # Install Monitor dependencies
 RUN apt-get update && \
     apt-get install -y \
-       pi-bluetooth \
-        build-essential \
         bluez \
         bluez-tools \
         libbluetooth-dev \
         libmosquitto-dev \
         mosquitto \
         mosquitto-clients \
-        dbus \
+        xxd \
         bc \
         bluez-hcidump \
         git \
