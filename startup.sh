@@ -7,10 +7,12 @@ if [ ! -e $FIRST_RUN_CHECK ]; then
     cd /
     git clone git://github.com/andrewjfreyer/monitor
     chmod +x /monitor/monitor.sh
-    echo "-- Starting Monitor --"
-    ( echo n ) | bash /monitor/monitor.sh
     touch $FIRST_RUN_CHECK
+    echo "-- Starting Monitor --"
+    cd monitor
+    ( echo n ) | ./monitor.sh $MON_OPT
 else
     echo "-- Starting Monitor --"
-    ( echo n ) | bash /monitor/monitor.sh
+    cd monitor
+    ( echo n ) | ./monitor.sh $MON_OPT
 fi
