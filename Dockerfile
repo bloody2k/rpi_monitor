@@ -1,13 +1,11 @@
-FROM alpine AS builder
-RUN apk update
-RUN apk add curl
-WORKDIR /qemu
-# downloaded here...
+FROM golang:1.12.0 AS builder
+# ... my go build steps (removed from this example)
+WORKDIR /builder/working/directory
 RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
-FROM arm32v6/alpine:latest
-# ...then added here
-COPY --from=builder /qemu/qemu-arm-static /usr/bin
+FROM arm32v7/alpine:latest
+# Copy across the qemu binary that was downloaded in the previous build step
+COPY --from=builder /builder/working/directory/qemu-arm-static /usr/bin
 
 # Build environment variables
 ENV VER=0.0.8 \
