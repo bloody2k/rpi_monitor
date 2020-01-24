@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM arm32v6/alpine:latest
 
 # Build environment variables
 ENV VER=0.0.8 \
