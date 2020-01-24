@@ -40,7 +40,9 @@ RUN apk add --no-cache \
         gawk \
         git \
         bash \
-        curl \
+        curl 
+
+RUN apk add --no-cache \
         mosquitto \
         mosquitto-clients \
         bc \
