@@ -3,9 +3,9 @@ FROM golang:1.12.0 AS builder
 WORKDIR /builder/working/directory
 RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
-FROM arm32v7/alpine:latest
+FROM resin/armv7hf-debian:stretch
 
-
+#FROM arm32v7/alpine:latest
 # Build environment variables
 ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
