@@ -43,8 +43,8 @@ RUN apt-get update && apt-get install -y \
         mosquitto-clients \
         bc \
         bluez \
-        bluez-deprecated \
-        bluez-btmon \
+        bluez-tools \
+        bluez-hcidump \
         dumb-init
 
 COPY startup.sh /startup.sh
