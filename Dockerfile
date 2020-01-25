@@ -1,11 +1,9 @@
-FROM golang:1.12.0 AS builder
-# ... my go build steps (removed from this example)
-WORKDIR /builder/working/directory
-RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
 #FROM arm32v7/debian:stretch
 
 FROM balenalib/armv7hf-debian:latest
+
+COPY qemu-arm-static /usr/bin
 
 #FROM arm32v7/alpine:latest
 # Build environment variables
@@ -31,9 +29,7 @@ ENV VER=0.0.8 \
     LAST_MSG_DELAY=30
 
 VOLUME /config
-# Copy across the qemu binary that was downloaded in the previous build step
-COPY --from=builder /builder/working/directory/qemu-arm-static /usr/bin
-WORKDIR /
+
 # Install Monitor dependencies
 RUN apk add --no-cache \
         openrc \
