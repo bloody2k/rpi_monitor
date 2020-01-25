@@ -3,7 +3,7 @@
 
 FROM balenalib/armv7hf-debian:latest
 
-COPY qemu-arm-static /usr/bin
+#COPY qemu-arm-static /usr/bin
 
 #FROM arm32v7/alpine:latest
 # Build environment variables
