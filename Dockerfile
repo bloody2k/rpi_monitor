@@ -31,16 +31,14 @@ ENV VER=0.0.8 \
 #VOLUME /config
 
 # Install Monitor dependencies
-RUN apt-get install --no-cache \
+RUN apt-get update && apt-get install -y \
         openrc \
         coreutils \
         procps \
         gawk \
         git \
         bash \
-        curl 
-
-RUN apk add --no-cache \
+        curl \
         mosquitto \
         mosquitto-clients \
         bc \
