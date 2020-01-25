@@ -28,10 +28,10 @@ ENV VER=0.0.8 \
     MQTT_VERSION= \
     LAST_MSG_DELAY=30
 
-VOLUME /config
+#VOLUME /config
 
 # Install Monitor dependencies
-RUN apk add --no-cache \
+RUN apt-get install --no-cache \
         openrc \
         coreutils \
         procps \
