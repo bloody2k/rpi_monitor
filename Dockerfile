@@ -1,4 +1,4 @@
-FROM golang:1.12.0 AS builder
+FROM golang:buster AS builder
 # ... my go build steps (removed from this example)
 WORKDIR /builder/working/directory
 RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
