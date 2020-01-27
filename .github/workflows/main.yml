@@ -1,10 +1,13 @@
 
-name: '[builder] CI for releases'
+name: 'Docker build - Beta Release'
 
 on:
     push:
         branches:
-            -  beta
+            - beta
+    release:
+        types:
+            -  created
 
 jobs:
     release:
@@ -33,4 +36,6 @@ jobs:
                 --platform=linux/amd64,linux/arm/v7,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
-                --tag bloody2k/rpi_monitor
+                --tag bloody2k/rpi_monitor:beta
+                --tag bloody2k/rpi_monitor:{{ github.ref}}
+
