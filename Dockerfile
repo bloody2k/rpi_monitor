@@ -17,7 +17,7 @@ FROM debian/buster-slim
 # Build environment variables
 ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
-    MON_OPT="" \
+    MON_OPT=""
 
 VOLUME /config
 
