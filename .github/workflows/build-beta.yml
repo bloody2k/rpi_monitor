@@ -30,13 +30,13 @@ jobs:
             with:
                 version: latest
         -
-            name: Build dockerfile (with push) - armv5
+            name: Build dockerfile (with push) - armv6
             run: |
                 docker buildx build \
-                --platform=linux/arm/v5 \
+                --platform=linux/arm/v6 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
-                --tag bloody2k/rpi_monitor:beta-armv5
+                --tag bloody2k/rpi_monitor:beta-armv6
      
         -
             name: Build dockerfile (with push) - armv7
