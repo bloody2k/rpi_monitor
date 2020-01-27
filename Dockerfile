@@ -6,7 +6,7 @@
 #FROM arm32v7/debian:stretch
 
 #FROM balenalib/armv7hf-debian:latest
-FROM debian/buster-slim
+FROM debian:buster-slim
 # Copy across the qemu binary that was downloaded in the previous build step
 #COPY --from=builder /builder/working/directory/qemu-arm-static /usr/bin
 # Now you can tun ARM docker steps.. yay!
