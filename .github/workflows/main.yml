@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         -   name: Echo github.ref
-            run: echo {{ github.ref}}
+            run: echo ${{ github.ref }}
         -
             name: Checkout
             uses: actions/checkout@v1
@@ -39,5 +39,5 @@ jobs:
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
                 --tag bloody2k/rpi_monitor:beta
-                --tag bloody2k/rpi_monitor:{{ github.ref}}
+                --tag bloody2k/rpi_monitor:${{ github.ref }}
 
