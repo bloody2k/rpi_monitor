@@ -33,7 +33,7 @@ jobs:
             name: Build dockerfile (with push)
             run: |
                 docker buildx build \
-                --platform=linux/amd64,linux/arm/v7,linux/arm/v6 \
+                --platform=linux/arm/v5,linux/arm/v7,linux/arm/v6 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
                 --tag bloody2k/rpi_monitor:beta
