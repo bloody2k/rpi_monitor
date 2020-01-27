@@ -12,7 +12,7 @@ jobs:
         steps:
         -
             name: Checkout
-            uses: actions/checkout@v1a
+            uses: actions/checkout@v1
         -
             name: Dockerhub login
             env:
