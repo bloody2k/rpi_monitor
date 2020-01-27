@@ -36,7 +36,7 @@ ENV VER=0.0.8 \
     MQTT_VERSION= \
     LAST_MSG_DELAY=30
 
-#VOLUME /config
+VOLUME /config
 
 # Install Monitor dependencies
 RUN apt-get update && apt-get install -y \
@@ -56,12 +56,10 @@ RUN apt-get update && apt-get install -y \
         dumb-init
 
 COPY startup.sh /startup.sh
-COPY health.sh /usr/local/bin/health
-
-# Install Monitor
-#WORKDIR /
-#RUN git clone git://github.com/andrewjfreyer/monitor
 RUN ["chmod", "+x", "/startup.sh"]
+
+COPY health.sh /usr/local/bin/health
+RUN ["chmod", "+x", "/usr/local/bin/health"]
 
 ENTRYPOINT ["dumb-init", "--", "/startup.sh"]
 HEALTHCHECK CMD health
