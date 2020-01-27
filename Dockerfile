@@ -1,39 +1,67 @@
-FROM resin/armv7hf-debian:stretch
+FROM golang:buster AS builder
+# ... my go build steps (removed from this example)
+WORKDIR /builder/working/directory
+RUN curl -L https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz | tar zxvf - -C . && mv qemu-3.0.0+resin-arm/qemu-arm-static .
 
+#FROM arm32v7/debian:stretch
+
+FROM balenalib/armv7hf-debian:latest
+
+# Copy across the qemu binary that was downloaded in the previous build step
+COPY --from=builder /builder/working/directory/qemu-arm-static /usr/bin
+# Now you can tun ARM docker steps.. yay!
+
+#COPY qemu-arm-static /usr/bin
+
+#FROM arm32v7/alpine:latest
 # Build environment variables
-ENV MON_VER=0.1.675 \
+ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
-    MON_OPT=""
+    MON_OPT="" \
+    PREF_ARRIVAL_SCAN_ATTEMPTS=1 \
+    PREF_DEPART_SCAN_ATTEMPTS=2 \
+    PREF_BEACON_EXPIRATION=240 \
+    PREF_MINIMUM_TIME_BETWEEN_SCANS=15 \
+    PREF_PASS_FILTER_ADV_FLAGS_ARRIVE=".*" \
+    PREF_PASS_FILTER_MANUFACTURER_ARRIVE=".*" \
+    PREF_FAIL_FILTER_ADV_FLAGS_ARRIVE="NONE" \
+    PREF_FAIL_FILTER_MANUFACTURER_ARRIVE="NONE" \
+    MQTT_ADDRESS=0.0.0.0 \
+    MQTT_PORT=1883 \
+    MQTT_USER= \
+    MQTT_PASSWORD= \
+    MQTT_TOPICPATH=monitor \
+    MQTT_PUBLISHER_IDENTITY= \
+    MQTT_CERTIFICATE_PATH= \
+    MQTT_VERSION= \
+    LAST_MSG_DELAY=30
 
-RUN apt-get update && apt-get -y install apt-transport-https
-
-# GET Mosquitto key for apt
-ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
-RUN apt-key add /mosquitto-repo.gpg.key
-ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-st$
-RUN apt-cache search mosquitto
+#VOLUME /config
 
 # Install Monitor dependencies
-RUN apt-get update && \
-    apt-get install -y \
-        bluez \
-        bluez-tools \
-        libbluetooth-dev \
-        libmosquitto-dev \
+RUN apt-get update && apt-get install -y \
+        openrc \
+        coreutils \
+        procps \
+        gawk \
+        git \
+        bash \
+        curl \
         mosquitto \
         mosquitto-clients \
-        xxd \
         bc \
+        bluez \
+        bluez-tools \
         bluez-hcidump \
-        git \
-        wget && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+        dumb-init
 
-ADD startup.sh /startup.sh
+COPY startup.sh /startup.sh
+COPY health.sh /usr/local/bin/health
 
 # Install Monitor
 #WORKDIR /
 #RUN git clone git://github.com/andrewjfreyer/monitor
 RUN ["chmod", "+x", "/startup.sh"]
-ENTRYPOINT ["/startup.sh"]
+
+ENTRYPOINT ["dumb-init", "--", "/startup.sh"]
+HEALTHCHECK CMD health
