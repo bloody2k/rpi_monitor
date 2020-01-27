@@ -16,8 +16,8 @@ jobs:
         -
             name: Dockerhub login
             env:
-                DOCKER_PASSWORD: Snooze4169
-                DOCKER_USERNAME: bloody2k
+                DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             run: |
                 echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
         -
