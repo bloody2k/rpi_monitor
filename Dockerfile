@@ -33,7 +33,7 @@ RUN mkdir /monitor \
     # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as /config) and sometimes its in the app root (i.e. /monitor)
     ### && ln -s /config/.public_name_cache .public_name_cache \
     # no systemctl ... this keeps the error out about it
-    && sed -i 's|systemctl is-active.*|SERVICE_ACTIVE=false|' support/init \
+    ### && sed -i 's|systemctl is-active.*|SERVICE_ACTIVE=false|' support/init \
     # default config directory to come from an environment variable
     ###&& sed -i 's|PREF_CONFIG_DIR='"''"'|PREF_CONFIG_DIR="${PREF_CONFIG_DIR}"|' support/argv \
     # Setting up openrc to work in docker ... https://github.com/dockage/alpine/blob/master/3.9/openrc/Dockerfile
