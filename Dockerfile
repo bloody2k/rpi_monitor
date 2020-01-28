@@ -26,7 +26,7 @@ RUN apk add --no-cache \
         dumb-init 
         
 RUN mkdir /monitor \
-    cd /monitor \
+    && cd /monitor \
     && touch .pids \
     && touch .previous_version \
     # make things executable
