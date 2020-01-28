@@ -25,10 +25,6 @@ RUN apk add --no-cache \
         bluez-btmon \
         dumb-init 
         
-RUN mkdir /monitor \
-    && cd /monitor \
-    && touch .pids \
-    && touch .previous_version \
     # make things executable
     # link the public name cache to the config directory ... i think there's a bug in monitor.sh where it doesn't consistently reference the same path to this...sometimes it looks in $base_directory (which we have as /config) and sometimes its in the app root (i.e. /monitor)
     ### && ln -s /config/.public_name_cache .public_name_cache \
@@ -39,7 +35,7 @@ RUN mkdir /monitor \
     # Setting up openrc to work in docker ... https://github.com/dockage/alpine/blob/master/3.9/openrc/Dockerfile
     # Start copy/paste from dockage
     # Disable getty's
-    && sed -i 's/^\(tty\d\:\:\)/#\1/g' /etc/inittab \
+RUN sed -i 's/^\(tty\d\:\:\)/#\1/g' /etc/inittab \
     && sed -i \
         # Change subsystem type to "docker"
         -e 's/#rc_sys=".*"/rc_sys="docker"/g' \
