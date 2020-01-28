@@ -3,7 +3,7 @@ name: 'Docker build - Alpine'
 on:
     push:
         branches:
-            - beta
+            - alpine
 
 jobs:
     release:
