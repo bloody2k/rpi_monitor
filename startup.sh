@@ -10,19 +10,10 @@ if [ ! -e $FIRST_RUN_CHECK ]; then
     chmod +x /monitor/monitor.sh
 fi
 
-cleanup() {
-    if [[ $pid -gt 0 ]]; then
-        kill $pid
-    fi
-    service bluetooth stop
-    service dbus stop
-    exec echo
-}
-
-trap "cleanup" EXIT INT TERM
-
+# inspired from https://github.com/moby/moby/issues/16208#issuecomment-161770118
 service dbus start
 service bluetooth start
+hciconfig hci0 up
 
 #write out the timestamp of the last msg received
 date +%s > last_msg
