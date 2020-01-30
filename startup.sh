@@ -32,7 +32,7 @@ echo "Starting Bluetooth Presence Monitor..."
 date +%s > last_msg
 while true; do [[ -e main_pipe ]] && read line < main_pipe && date +%s > last_msg; done &
 
-while monitor -D /opt/monitor $MON_OPT >&2; do
+while monitor -D /config $MON_OPT >&2; do
     echo "Restarting Bluetooth Presence Monitor..."
 done
 exit $?
