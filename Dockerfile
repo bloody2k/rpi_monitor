@@ -31,15 +31,15 @@ COPY health.sh /health.sh
 RUN ["chmod", "+x", "/health.sh"]
 
 # Configure system
-RUN install -d /opt/monitor \
+RUN install -d /config \
     && touch \
         /monitor/.pids \
         /monitor/.previous_version \
-        /opt/monitor/.public_name_cache \
+        /config/.public_name_cache \
     # link the public name cache to the config directory ... i think there's a bug in monitor.sh
     # where it doesn't consistently reference the same path to this... sometimes it looks in
     # $base_directory (which we have as /opt/monitor) and sometimes its in the app root (i.e. /monitor)
-    && ln -s /opt/monitor/.public_name_cache /monitor/.public_name_cache \
+    && ln -s /config/.public_name_cache /monitor/.public_name_cache \
     # make things executable
     && chmod +x /*.sh \
     && ln -s /monitor/monitor.sh /usr/local/bin/monitor
