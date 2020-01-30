@@ -1,0 +1,47 @@
+name: 'Docker build - Debian'
+
+on:
+    push:
+        branches:
+            - debian
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+        -   name: Get the version
+            id: get_version
+            run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        -
+            name: Checkout
+            uses: actions/checkout@v1
+        -
+            name: Dockerhub login
+            env:
+                DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            run: |
+                echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+        -
+            name: Set up Docker Buildx
+            id: buildx
+            uses: crazy-max/ghaction-docker-buildx@v1
+            with:
+                version: latest
+        -
+            name: Build dockerfile (with push) - armv6
+            run: |
+                docker buildx build \
+                --platform=linux/arm/v6 \
+                --output "type=image,push=true" \
+                --file ./Dockerfile . \
+                --tag bloody2k/rpi_monitor:debian-armv6
+     
+        -
+            name: Build dockerfile (with push) - armv7
+            run: |
+                docker buildx build \
+                --platform=linux/arm/v7 \
+                --output "type=image,push=true" \
+                --file ./Dockerfile . \
+                --tag bloody2k/rpi_monitor:debian-armv7
