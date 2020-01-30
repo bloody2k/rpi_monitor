@@ -1,6 +1,6 @@
 ARG BUILD_FROM=hassioaddons/debian-base:latest
 # hadolint ignore=DL3006
-FROM hassioaddons/debian-base:latest
+FROM debian:buster-slim
 
 # Build environment variables
 ENV VER=0.0.8 \
