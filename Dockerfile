@@ -20,7 +20,7 @@ RUN apt-get update \
         procps \
         usbutils \
     && git clone --branch "0.2.1" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
-    && cd /monitor # \
+    && cd /monitor
     # && git checkout origin/0.2.1 -f
 
 # Copy root filesystem
