@@ -20,11 +20,11 @@ trap "cleanup" EXIT INT TERM
 service dbus start
 service bluetooth start
 
-echo "Updating Bluetooth Presence Monitor to latest version..."
+#echo "Updating Bluetooth Presence Monitor to latest version..."
 
-git fetch --depth=1
-git checkout origin/master -f
-git pull -f
+#git fetch --depth=1
+#git checkout origin/master -f
+#git pull -f
 
 echo "Starting Bluetooth Presence Monitor..."
 
