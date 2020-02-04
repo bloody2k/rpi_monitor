@@ -8,7 +8,7 @@ ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
     MON_OPT=""
 
-RUN apt-get update && apt-get -y install apt-transport-https
+RUN apt-get update && apt-get -y install gnupg
 
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
