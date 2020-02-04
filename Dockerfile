@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install gnupg
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
 RUN apt-key add /mosquitto-repo.gpg.key
-ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-st$
+ADD http://repo.mosquitto.org/debian/mosquitto-buster.list /etc/apt/sources.list.d/mosquitto-st$
 RUN apt-cache search mosquitto
 
 # Install required packages
