@@ -19,7 +19,7 @@ RUN apt-get update \
         mosquitto-clients \
         procps \
         usbutils \
-    && git clone --branch "0.2.1" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
+    && git clone --branch "0.2.1" --depth=1 http://github.com/andrewjfreyer/monitor.git /monitor \
     && cd /monitor 
     # && git checkout tag/0.2.1 -f
 
