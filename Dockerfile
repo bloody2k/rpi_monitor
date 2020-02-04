@@ -1,6 +1,6 @@
 ARG BUILD_FROM=hassioaddons/debian-base:latest
 # hadolint ignore=DL3006
-FROM balenalib/armv7hf-debian:latest
+FROM arm32v7/debian:stretch
 
 # Build environment variables
 ENV VER=0.0.8 \
