@@ -8,6 +8,12 @@ ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
     MON_OPT=""
 
+# GET Mosquitto key for apt
+ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
+RUN apt-key add /mosquitto-repo.gpg.key
+ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-st$
+RUN apt-cache search mosquitto
+
 # Install required packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -17,6 +23,9 @@ RUN apt-get update \
         bluez-hcidump \
         ca-certificates \
         git \
+        libmosquitto-dev \
+        libmosquitto1 \
+        mosquitto \
         mosquitto-clients \
         procps \
         usbutils \
