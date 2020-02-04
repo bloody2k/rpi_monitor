@@ -4,9 +4,11 @@ FROM arm32v7/debian:stretch
 
 # Build environment variables
 ENV VER=0.0.8 \
-    BUILDON="alpine" \
+    BUILDON="debian-stretch" \
     CREATED="BLOODY2k" \
     MON_OPT=""
+
+RUN apt-get update && apt-get -y install apt-transport-https
 
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
