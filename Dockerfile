@@ -8,13 +8,13 @@ ENV VER=0.0.8 \
     CREATED="BLOODY2k" \
     MON_OPT=""
 
-RUN apt-get update && apt-get -y install gnupg apt-transport-https
+#RUN apt-get update && apt-get -y install gnupg apt-transport-https
 
 # GET Mosquitto key for apt
-ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
-RUN apt-key add /mosquitto-repo.gpg.key
-ADD http://repo.mosquitto.org/debian/mosquitto-buster.list /etc/apt/sources.list.d/mosquitto-buster.list
-RUN apt-cache search mosquitto
+#ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
+#RUN apt-key add /mosquitto-repo.gpg.key
+#ADD http://repo.mosquitto.org/debian/mosquitto-buster.list /etc/apt/sources.list.d/mosquitto-buster.list
+#RUN apt-cache search mosquitto
 
 # Install required packages
 RUN apt-get update \
@@ -25,12 +25,13 @@ RUN apt-get update \
         bluez-hcidump \
         ca-certificates \
         git \
-        libmosquitto-dev \
-        libmosquitto1 \
-        mosquitto \
-        mosquitto-clients \
+        libmosquitto-dev=1.6.4-0mosquitto1 \
+        libmosquitto1=1.6.4-0mosquitto1 \
+        mosquitto=1.6.4-0mosquitto1 \
+        mosquitto-clients=1.6.4-0mosquitto1 \
         procps \
         usbutils \
+    && apt-mark hold libmosquitto1 libmosquitto-dev mosquitto mosquitto-clients \
     && git clone --branch "0.2.1" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
     && cd /monitor 
     # && git checkout tag/0.2.1 -f
