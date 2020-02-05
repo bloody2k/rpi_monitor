@@ -25,13 +25,13 @@ RUN apt-get update \
         bluez-hcidump \
         ca-certificates \
         git \
-        libmosquitto-dev=1.6.4-0mosquitto1~buster1 \
-        libmosquitto1=1.6.4-0mosquitto1~buster1 \
-        mosquitto=1.6.4-0mosquitto1~buster1 \
-        mosquitto-clients=1.6.4-0mosquitto1~buster1 \
+        libmosquitto-dev \
+        libmosquitto1 \
+        mosquitto \
+        mosquitto-clients \
         procps \
         usbutils \
-    && apt-mark hold libmosquitto1 libmosquitto-dev mosquitto mosquitto-clients \
+#    && apt-mark hold libmosquitto1 libmosquitto-dev mosquitto mosquitto-clients \
     && git clone --branch "0.2.1" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
     && cd /monitor 
     # && git checkout tag/0.2.1 -f
