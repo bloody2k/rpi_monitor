@@ -19,10 +19,8 @@ ENV VER=0.0.8 \
 # Install required packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        bc \
+#        bc \
         bluetooth \
-        bluez \
-        bluez-hcidump \
         ca-certificates \
         git \
         libmosquitto-dev \
@@ -30,14 +28,24 @@ RUN apt-get update \
         mosquitto \
         mosquitto-clients \
         procps \
-        usbutils \
+        python-bluez \
+        python-setuptools \
+        usbutils
 #    && apt-mark hold libmosquitto1 libmosquitto-dev mosquitto mosquitto-clients \
-    && git clone --branch "0.2.1" --depth=1 https://github.com/andrewjfreyer/monitor.git /monitor \
+
+## Installing monitor
+RUN git clone --branch "dev-python-bluez" --depth=1 https://github.com/gadric/monitor.git /monitor \
     && cd /monitor 
     # && git checkout tag/0.2.1 -f
 
 RUN ["chmod", "+x", "/monitor/monitor.sh"]
 
+## Installing bluetooth-proximity
+RUN cd / \
+    && git clone https://github.com/ewenchou/bluetooth-proximity.git \
+    && cd /bluetooth-proximity \
+    && python setup.py install 
+    
 # Copy root filesystem
 COPY startup.sh /startup.sh
 RUN ["chmod", "+x", "/startup.sh"]
