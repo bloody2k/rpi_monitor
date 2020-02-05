@@ -25,10 +25,10 @@ RUN apt-get update \
         bluez-hcidump \
         ca-certificates \
         git \
-        libmosquitto-dev=1.6.4-0mosquitto1 \
-        libmosquitto1=1.6.4-0mosquitto1 \
-        mosquitto=1.6.4-0mosquitto1 \
-        mosquitto-clients=1.6.4-0mosquitto1 \
+        libmosquitto-dev=1.6.4-0mosquitto1~buster1 \
+        libmosquitto1=1.6.4-0mosquitto1~buster1 \
+        mosquitto=1.6.4-0mosquitto1~buster1 \
+        mosquitto-clients=1.6.4-0mosquitto1~buster1 \
         procps \
         usbutils \
     && apt-mark hold libmosquitto1 libmosquitto-dev mosquitto mosquitto-clients \
