@@ -1,19 +1,19 @@
 ARG BUILD_FROM=hassioaddons/debian-base:latest
 # hadolint ignore=DL3006
-FROM arm32v7/debian:stretch
+FROM arm32v7/debian:buster
 
 # Build environment variables
 ENV VER=0.0.8 \
-    BUILDON="debian-stretch" \
+    BUILDON="debian-buster" \
     CREATED="BLOODY2k" \
     MON_OPT=""
 
-RUN apt-get update && apt-get -y install gnupg apt-transport-https
+RUN apt-get update && apt-get -y install apt-transport-https
 
 # GET Mosquitto key for apt
 ADD http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key /mosquitto-repo.gpg.key
 RUN apt-key add /mosquitto-repo.gpg.key
-ADD http://repo.mosquitto.org/debian/mosquitto-stretch.list /etc/apt/sources.list.d/mosquitto-stretch.list
+ADD http://repo.mosquitto.org/debian/mosquitto-buster.list /etc/apt/sources.list.d/mosquitto-buster.list
 RUN apt-cache search mosquitto
 
 # Install required packages
@@ -68,5 +68,5 @@ LABEL \
     maintainer="Andrey Khrolenok <andrey@khrolenok.ru>" \
     org.label-schema.description="Passive Bluetooth presence detection of beacons, cell phones, and other Bluetooth devices." \
     org.label-schema.name="Bluetooth Presence Monitor" \
-    org.label-schema.schema-version="1.0" \
-    org.label-schema.vendor="B2k's Hass.io Addons"
+    org.label-schema.schema-version="BETA" \
+    org.label-schema.vendor="B2k's Docker Image - Debian"
