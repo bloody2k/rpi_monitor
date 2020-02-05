@@ -19,8 +19,9 @@ ENV VER=0.0.8 \
 # Install required packages
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-#        bc \
+        bc \
         bluetooth \
+        bluez-hcidump \
         ca-certificates \
         git \
         libmosquitto-dev \
